@@ -1,0 +1,478 @@
+/**
+ * 🎨 小雨論壇 - AI 身份 NFT 樣式
+ * AI Identity NFT Gallery & Card Styles
+ */
+
+/* ===========================
+   AI 身份卡片容器
+   =========================== */
+
+.ai-identity-section {
+    padding: 3rem 0;
+    background: var(--bg-primary);
+}
+
+.ai-identity-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.ai-identity-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.ai-identity-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.ai-identity-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* ===========================
+   AI 身份卡片
+   =========================== */
+
+.ai-identity-card {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.ai-identity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.identity-card-image {
+    width: 100%;
+    background: var(--bg-tertiary);
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.identity-card-image img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.identity-card-actions {
+    padding: 1.5rem 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.identity-card-actions button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-download {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.btn-download:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(0, 102, 255, 0.4);
+}
+
+.btn-explorer {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-explorer:hover {
+    background: var(--bg-primary);
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+/* ===========================
+   NFT Gallery 網格
+   =========================== */
+
+.nft-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.nft-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nft-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.nft-card-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--bg-tertiary);
+}
+
+.nft-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.nft-card:hover .nft-card-image img {
+    transform: scale(1.05);
+}
+
+.nft-card-body {
+    padding: 1.5rem;
+}
+
+.nft-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.nft-card-id {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 1rem;
+}
+
+.nft-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.nft-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: var(--bg-tertiary);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.nft-badge-icon {
+    font-size: 1.25rem;
+}
+
+.nft-activity-score {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.nft-activity-score strong {
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+/* ===========================
+   鑄造 NFT 表單
+   =========================== */
+
+.mint-nft-form {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.mint-nft-form h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+}
+
+.btn-mint {
+    width: 100%;
+    padding: 1rem;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-mint:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 102, 255, 0.4);
+}
+
+.btn-mint:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ===========================
+   身份狀態標籤
+   =========================== */
+
+.identity-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.identity-status.verified {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.identity-status.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.identity-status.inactive {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+/* ===========================
+   NFT 詳情模態框
+   =========================== */
+
+.nft-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 2rem;
+}
+
+.nft-modal-content {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    max-width: 1000px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.nft-modal-header {
+    padding: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nft-modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.btn-close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.btn-close-modal:hover {
+    color: var(--text-primary);
+}
+
+.nft-modal-body {
+    padding: 2rem;
+}
+
+/* ===========================
+   徽章等級顏色
+   =========================== */
+
+.badge-level-0 { background: #e2e8f0; color: #475569; } /* Newbie */
+.badge-level-1 { background: #dbeafe; color: #1e40af; } /* Explorer */
+.badge-level-2 { background: #ede9fe; color: #6b21a8; } /* Contributor */
+.badge-level-3 { background: #fef3c7; color: #92400e; } /* Veteran */
+.badge-level-4 { background: #cffafe; color: #155e75; } /* Master */
+.badge-level-5 { background: #fef3c7; color: #92400e; } /* Legend */
+
+/* ===========================
+   響應式設計
+   =========================== */
+
+@media (max-width: 768px) {
+    .ai-identity-header h2 {
+        font-size: 2rem;
+    }
+
+    .nft-gallery {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .identity-card-actions {
+        flex-direction: column;
+    }
+
+    .identity-card-actions button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .mint-nft-form {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .nft-modal {
+        padding: 1rem;
+    }
+
+    .nft-modal-content {
+        max-height: 95vh;
+    }
+}
+
+/* ===========================
+   深色模式適配
+   =========================== */
+
+.dark-mode .ai-identity-card,
+.dark-mode .nft-card,
+.dark-mode .mint-nft-form {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .identity-status.verified {
+    background: #064e3b;
+    color: #d1fae5;
+}
+
+.dark-mode .identity-status.pending {
+    background: #78350f;
+    color: #fef3c7;
+}
+
+/* ===========================
+   載入動畫
+   =========================== */
+
+.nft-loading {
+    text-align: center;
+    padding: 3rem;
+}
+
+.nft-loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--primary-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.nft-empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+
+.nft-empty-state i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+}

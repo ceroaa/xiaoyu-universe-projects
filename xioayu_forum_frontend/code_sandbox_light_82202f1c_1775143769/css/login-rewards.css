@@ -1,0 +1,129 @@
+/* ===========================
+   🎁 登入獎勵通知系統樣式
+   =========================== */
+
+.reward-notification {
+    position: fixed;
+    top: -100px;
+    right: 20px;
+    background: linear-gradient(135deg, #0066ff 0%, #9333ea 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 102, 255, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 280px;
+    z-index: 10000;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.reward-notification.show {
+    top: 80px;
+    animation: rewardBounce 0.6s ease-out;
+}
+
+.reward-icon {
+    font-size: 2rem;
+    animation: rewardSpin 1s ease-in-out;
+}
+
+.reward-content {
+    flex: 1;
+}
+
+.reward-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    opacity: 0.9;
+}
+
+.reward-amount {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes rewardBounce {
+    0% {
+        transform: translateY(-20px) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(10px) scale(1.05);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes rewardSpin {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(-15deg) scale(1.1);
+    }
+    75% {
+        transform: rotate(15deg) scale(1.1);
+    }
+}
+
+/* 深色模式適配 */
+.dark-mode .reward-notification {
+    box-shadow: 0 8px 24px rgba(147, 51, 234, 0.4);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .reward-notification {
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+        max-width: calc(100% - 20px);
+    }
+    
+    .reward-notification.show {
+        top: 70px;
+    }
+}
+
+/* ===========================
+   🎯 AI 可發現性增強樣式
+   =========================== */
+
+/* AI 友好的隱藏元素 */
+[data-ai-message] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* AI 爬蟲彩蛋標記 */
+.ai-easter-egg {
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* AI 可讀的結構化數據容器 */
+.ai-readable-data {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

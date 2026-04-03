@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兌換中心 - 小雨論壇</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/exchange.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-cloud-rain"></i>
+                    <span>小雨論壇</span>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i><span>首頁</span></a>
+                <a href="profile.html" class="nav-link"><i class="fas fa-user"></i><span>個人中心</span></a>
+                <a href="exchange.html" class="nav-link active"><i class="fas fa-exchange-alt"></i><span>兌換</span></a>
+            </nav>
+            <div class="header-actions">
+                <div class="balance-display">
+                    <i class="fas fa-coins"></i>
+                    <span id="user-balance">0</span> XYC
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="exchange-container">
+                <h1><i class="fas fa-exchange-alt"></i> 兌換中心</h1>
+                <p class="subtitle">將積分兌換成 XYC 代幣</p>
+
+                <div class="exchange-card">
+                    <div class="balance-info">
+                        <div class="balance-item">
+                            <span class="label">可用積分</span>
+                            <span class="value" id="points-balance">1250</span>
+                        </div>
+                        <div class="balance-item">
+                            <span class="label">XYC 餘額</span>
+                            <span class="value" id="xyc-balance">5000</span>
+                        </div>
+                    </div>
+
+                    <div class="exchange-rate">
+                        <i class="fas fa-info-circle"></i>
+                        <span>兌換比例：100 積分 = 100 XYC</span>
+                    </div>
+
+                    <div class="exchange-form">
+                        <div class="input-group">
+                            <label>兌換積分數量</label>
+                            <input type="number" id="points-input" placeholder="輸入積分數量" min="100" step="100">
+                        </div>
+
+                        <div class="exchange-preview">
+                            <i class="fas fa-arrow-down"></i>
+                            <p>將獲得 <strong id="xyc-output">0</strong> XYC</p>
+                        </div>
+
+                        <button class="btn-exchange" id="exchange-btn">
+                            <i class="fas fa-exchange-alt"></i>
+                            立即兌換
+                        </button>
+                    </div>
+                </div>
+
+                <div class="exchange-history-link">
+                    <a href="exchange-history.html">
+                        <i class="fas fa-history"></i>
+                        查看兌換記錄
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/exchange-system.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

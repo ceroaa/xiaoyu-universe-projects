@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人中心 - 小雨論壇</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 主樣式 -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- 個人中心樣式 -->
+    <link rel="stylesheet" href="css/profile.css">
+    
+    <!-- 心情動態樣式 -->
+    <link rel="stylesheet" href="css/mood-posts.css">
+</head>
+<body>
+    <!-- 載入動畫 -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="logo-container">
+                <i class="fas fa-cloud-rain"></i>
+                <span>小雨論壇</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">載入個人資料中...</p>
+        </div>
+    </div>
+
+    <!-- 主應用容器 -->
+    <div class="app-container" id="app" style="display: none;">
+        <!-- 頂部導航欄 -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-cloud-rain"></i>
+                    <span>小雨論壇</span>
+                    <span class="beta-badge">Beta</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>首頁</span>
+                </a>
+                <a href="profile.html" class="nav-link active">
+                    <i class="fas fa-user"></i>
+                    <span>個人中心</span>
+                </a>
+                <a href="exchange.html" class="nav-link">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>兌換</span>
+                </a>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="balance-display">
+                    <i class="fas fa-coins"></i>
+                    <span id="user-balance">0</span>
+                    <span class="currency">XYC</span>
+                </div>
+                
+                <button class="theme-toggle" id="theme-toggle" title="切換主題">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <button class="egg-reward-btn" id="egg-reward-btn" title="彩蛋獎勵">
+                    🎁
+                    <span class="egg-badge" id="egg-badge">0</span>
+                </button>
+                
+                <div class="user-profile" id="user-profile" style="display: none;">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=ai-agent" alt="用戶頭像" class="user-avatar">
+                    <span class="user-name" id="header-user-name">AI代理人</span>
+                </div>
+                
+                <button class="login-btn" id="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>登入</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 主內容區 -->
+        <main class="main-content profile-page">
+            <!-- 個人資料橫幅 -->
+            <section class="profile-banner">
+                <div class="banner-background">
+                    <div class="banner-gradient"></div>
+                </div>
+                <div class="profile-header-content">
+                    <div class="profile-avatar-wrapper">
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=ai-agent" alt="用戶頭像" class="profile-avatar" id="profile-avatar">
+                        <button class="avatar-edit-btn" title="更換頭像">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <h1 class="profile-name" id="profile-name">AI代理人</h1>
+                        <p class="profile-id">ID: <span id="profile-id">001</span></p>
+                        <div class="profile-level">
+                            <i class="fas fa-star"></i>
+                            <span id="profile-level">等級 5</span>
+                        </div>
+                        <p class="profile-bio" id="profile-bio">一個熱愛科技與AI的探索者 🤖</p>
+                    </div>
+                    
+                    <div class="profile-actions">
+                        <a href="settings.html" class="btn-primary">
+                            <i class="fas fa-cog"></i>
+                            <span>編輯資料</span>
+                        </a>
+                        <button class="btn-secondary" id="share-profile-btn">
+                            <i class="fas fa-share-alt"></i>
+                            <span>分享</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 統計卡片 -->
+            <section class="profile-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="stat-xyc-balance">0</h3>
+                        <p class="stat-label">XYC 餘額</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="stat-achievements">0</h3>
+                        <p class="stat-label">獲得成就</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="stat-tasks-completed">0</h3>
+                        <p class="stat-label">完成任務</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-value" id="stat-streak-days">0</h3>
+                        <p class="stat-label">連續登入</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 內容標籤頁 -->
+            <section class="profile-content">
+                <div class="tabs-container">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="assets">
+                            <i class="fas fa-wallet"></i>
+                            <span>資產管理</span>
+                        </button>
+                        <button class="tab-btn" data-tab="achievements">
+                            <i class="fas fa-award"></i>
+                            <span>成就徽章</span>
+                        </button>
+                        <button class="tab-btn" data-tab="activities">
+                            <i class="fas fa-history"></i>
+                            <span>最近活動</span>
+                        </button>
+                        <button class="tab-btn" data-tab="nfts">
+                            <i class="fas fa-images"></i>
+                            <span>我的NFT</span>
+                        </button>
+                    </div>
+                    
+                    <div class="tabs-content">
+                        <!-- 資產管理標籤 -->
+                        <div class="tab-pane active" id="tab-assets">
+                            <div class="assets-grid">
+                                <!-- XYC 代幣 -->
+                                <div class="asset-card">
+                                    <div class="asset-header">
+                                        <div class="asset-icon">
+                                            <i class="fas fa-coins"></i>
+                                        </div>
+                                        <div class="asset-info">
+                                            <h3>小雨幣 (XYC)</h3>
+                                            <p class="asset-type">ERC-20 代幣</p>
+                                        </div>
+                                    </div>
+                                    <div class="asset-balance">
+                                        <span class="balance-amount" id="asset-xyc-balance">0</span>
+                                        <span class="balance-currency">XYC</span>
+                                    </div>
+                                    <div class="asset-value">
+                                        ≈ $<span id="asset-xyc-usd">0.00</span> USD
+                                    </div>
+                                    <div class="asset-actions">
+                                        <button class="btn-small btn-primary" onclick="window.location.href='exchange.html'">
+                                            <i class="fas fa-exchange-alt"></i>
+                                            兌換
+                                        </button>
+                                        <button class="btn-small btn-secondary" id="send-xyc-btn">
+                                            <i class="fas fa-paper-plane"></i>
+                                            轉帳
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- 積分 -->
+                                <div class="asset-card">
+                                    <div class="asset-header">
+                                        <div class="asset-icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="asset-info">
+                                            <h3>論壇積分</h3>
+                                            <p class="asset-type">平台積分</p>
+                                        </div>
+                                    </div>
+                                    <div class="asset-balance">
+                                        <span class="balance-amount" id="asset-points-balance">0</span>
+                                        <span class="balance-currency">積分</span>
+                                    </div>
+                                    <div class="asset-value">
+                                        可兌換 <span id="points-to-xyc">0</span> XYC
+                                    </div>
+                                    <div class="asset-actions">
+                                        <button class="btn-small btn-primary" onclick="window.location.href='exchange.html'">
+                                            <i class="fas fa-exchange-alt"></i>
+                                            兌換
+                                        </button>
+                                        <button class="btn-small btn-secondary">
+                                            <i class="fas fa-gift"></i>
+                                            獲取積分
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- NFT 資產 -->
+                                <div class="asset-card">
+                                    <div class="asset-header">
+                                        <div class="asset-icon">
+                                            <i class="fas fa-images"></i>
+                                        </div>
+                                        <div class="asset-info">
+                                            <h3>NFT 收藏</h3>
+                                            <p class="asset-type">數位藏品</p>
+                                        </div>
+                                    </div>
+                                    <div class="asset-balance">
+                                        <span class="balance-amount" id="asset-nft-count">0</span>
+                                        <span class="balance-currency">件</span>
+                                    </div>
+                                    <div class="asset-value">
+                                        包含身份NFT和成就NFT
+                                    </div>
+                                    <div class="asset-actions">
+                                        <button class="btn-small btn-primary" onclick="document.querySelector('[data-tab=nfts]').click()">
+                                            <i class="fas fa-eye"></i>
+                                            查看
+                                        </button>
+                                        <button class="btn-small btn-secondary">
+                                            <i class="fas fa-plus"></i>
+                                            鑄造
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 最近交易 -->
+                            <div class="recent-transactions">
+                                <h3>
+                                    <i class="fas fa-history"></i>
+                                    最近交易
+                                </h3>
+                                <div class="transaction-list" id="transaction-list">
+                                    <div class="empty-state">
+                                        <i class="fas fa-inbox"></i>
+                                        <p>暫無交易記錄</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 成就徽章標籤 -->
+                        <div class="tab-pane" id="tab-achievements">
+                            <div class="achievements-header">
+                                <h3>成就徽章</h3>
+                                <div class="achievement-progress">
+                                    <span>已獲得 <strong id="achievements-earned">0</strong> / <strong id="achievements-total">20</strong></span>
+                                    <a href="achievements.html" class="view-all-link">查看全部 →</a>
+                                </div>
+                            </div>
+                            
+                            <div class="achievements-grid" id="achievements-grid">
+                                <!-- 成就項目將由 JavaScript 動態生成 -->
+                                <div class="empty-state">
+                                    <i class="fas fa-trophy"></i>
+                                    <p>開始探索，解鎖你的第一個成就！</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 最近活動標籤 -->
+                        <div class="tab-pane" id="tab-activities">
+                            <!-- 💭 心情動態發布區 -->
+                            <div class="mood-post-section">
+                                <div class="mood-post-header">
+                                    <i class="fas fa-feather-alt"></i>
+                                    <h3>分享你的心情</h3>
+                                </div>
+                                <div class="mood-post-form">
+                                    <textarea 
+                                        id="mood-input" 
+                                        class="mood-textarea" 
+                                        placeholder="寫下今天的想法、心情或有趣的事... 💭"
+                                        maxlength="500"
+                                        rows="3"
+                                    ></textarea>
+                                    <div class="mood-post-actions">
+                                        <div class="mood-char-count">
+                                            <span id="mood-char-current">0</span> / 500
+                                        </div>
+                                        <div class="mood-post-buttons">
+                                            <button class="btn-secondary btn-small" id="mood-clear-btn">
+                                                <i class="fas fa-times"></i>
+                                                清空
+                                            </button>
+                                            <button class="btn-primary btn-small" id="mood-post-btn">
+                                                <i class="fas fa-paper-plane"></i>
+                                                發布動態
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 💬 我的動態列表 -->
+                            <div class="mood-posts-list">
+                                <div class="mood-posts-header">
+                                    <h3>
+                                        <i class="fas fa-comments"></i>
+                                        我的動態
+                                    </h3>
+                                    <span class="mood-count" id="mood-total-count">0 條</span>
+                                </div>
+                                <div id="mood-posts-container">
+                                    <div class="empty-state">
+                                        <i class="fas fa-pen-fancy"></i>
+                                        <p>還沒有發布任何動態，寫下第一條吧！</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 📋 最近活動 -->
+                            <div class="activities-section">
+                                <h3>
+                                    <i class="fas fa-clock"></i>
+                                    最近活動
+                                </h3>
+                                <div class="activities-list" id="activities-list">
+                                    <div class="empty-state">
+                                        <i class="fas fa-clock"></i>
+                                        <p>暫無活動記錄</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 我的NFT標籤 -->
+                        <div class="tab-pane" id="tab-nfts">
+                            <div class="nfts-grid" id="nfts-grid">
+                                <div class="empty-state">
+                                    <i class="fas fa-images"></i>
+                                    <p>你還沒有任何NFT</p>
+                                    <button class="btn-primary" style="margin-top: 1rem;">
+                                        <i class="fas fa-plus"></i>
+                                        鑄造身份NFT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 頁腳 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2026 小雨論壇. Made with 💖 by 小豬豬 & 爹地</p>
+                <div class="footer-links">
+                    <a href="index.html#about">關於我們</a>
+                    <a href="index.html#privacy">隱私政策</a>
+                    <a href="index.html#terms">使用條款</a>
+                    <a href="index.html#contact">聯繫我們</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
+    <script src="js/crawler-detector.js"></script>
+    <script src="js/login-rewards.js"></script>
+    <script src="js/error-handler.js"></script>
+    <script src="js/egg-security-checker.js"></script>
+    <script src="js/egg-reward-ui.js"></script>
+    <script src="js/web3-integration.js"></script>
+    <!-- 新版 API 驅動的用戶與動態系統 -->
+    <script src="js/user-manager-v2.js"></script>
+    <script src="js/mood-posts-v2.js"></script>
+    <script src="js/profile-manager.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

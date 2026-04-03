@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兌換記錄 - 小雨論壇</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/exchange.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-cloud-rain"></i>
+                    <span>小雨論壇</span>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i><span>首頁</span></a>
+                <a href="profile.html" class="nav-link"><i class="fas fa-user"></i><span>個人中心</span></a>
+                <a href="exchange.html" class="nav-link"><i class="fas fa-exchange-alt"></i><span>兌換</span></a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="history-container">
+                <h1><i class="fas fa-history"></i> 兌換記錄</h1>
+                
+                <div class="history-list">
+                    <div class="history-item">
+                        <div class="item-icon success">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="item-info">
+                            <h3>兌換成功</h3>
+                            <p>500 積分 → 5 XYC</p>
+                            <span class="time">2024-03-08 14:30</span>
+                        </div>
+                        <span class="status success">已完成</span>
+                    </div>
+
+                    <div class="history-item">
+                        <div class="item-icon success">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="item-info">
+                            <h3>兌換成功</h3>
+                            <p>1000 積分 → 1000 XYC</p>
+                            <span class="time">2024-03-07 10:15</span>
+                        </div>
+                        <span class="status success">已完成</span>
+                    </div>
+
+                    <div class="empty-state" style="display: none;">
+                        <i class="fas fa-inbox"></i>
+                        <p>暫無兌換記錄</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 部署診斷工具 - 小雨論壇</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status.checking {
+            background: #fbbf24;
+            color: #78350f;
+        }
+
+        .status.success {
+            background: #10b981;
+            color: white;
+        }
+
+        .status.error {
+            background: #ef4444;
+            color: white;
+        }
+
+        .check-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f3f4f6;
+            border-radius: 12px;
+        }
+
+        .check-section h2 {
+            color: #374151;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #e5e7eb;
+        }
+
+        .check-item.success {
+            border-left-color: #10b981;
+        }
+
+        .check-item.error {
+            border-left-color: #ef4444;
+        }
+
+        .check-item.warning {
+            border-left-color: #fbbf24;
+        }
+
+        .icon {
+            font-size: 1.5rem;
+        }
+
+        .icon.success {
+            color: #10b981;
+        }
+
+        .icon.error {
+            color: #ef4444;
+        }
+
+        .icon.warning {
+            color: #fbbf24;
+        }
+
+        .check-details {
+            flex: 1;
+        }
+
+        .check-name {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .check-path {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-family: monospace;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            padding: 1.5rem;
+            background: #f3f4f6;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .summary-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-card p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .error-details {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #fee2e2;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: #991b1b;
+        }
+
+        .console-output {
+            background: #1f2937;
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 部署診斷工具</h1>
+        <p class="subtitle">自動檢測網站資源載入狀況</p>
+
+        <div class="status checking" id="overall-status">
+            ⏳ 正在檢查...
+        </div>
+
+        <div class="summary" id="summary">
+            <div class="summary-card">
+                <h3 id="total-checks">0</h3>
+                <p>總檢查項</p>
+            </div>
+            <div class="summary-card">
+                <h3 id="success-count" style="color: #10b981;">0</h3>
+                <p>成功</p>
+            </div>
+            <div class="summary-card">
+                <h3 id="error-count" style="color: #ef4444;">0</h3>
+                <p>失敗</p>
+            </div>
+            <div class="summary-card">
+                <h3 id="warning-count" style="color: #fbbf24;">0</h3>
+                <p>警告</p>
+            </div>
+        </div>
+
+        <div class="check-section">
+            <h2>📄 HTML 文件檢查</h2>
+            <div id="html-checks"></div>
+        </div>
+
+        <div class="check-section">
+            <h2>🎨 CSS 文件檢查</h2>
+            <div id="css-checks"></div>
+        </div>
+
+        <div class="check-section">
+            <h2>⚙️ JavaScript 文件檢查</h2>
+            <div id="js-checks"></div>
+        </div>
+
+        <div class="check-section">
+            <h2>🌐 CDN 資源檢查</h2>
+            <div id="cdn-checks"></div>
+        </div>
+
+        <div class="check-section">
+            <h2>📋 控制台輸出</h2>
+            <div class="console-output" id="console-output"></div>
+        </div>
+
+        <a href="index.html" class="btn">← 返回首頁</a>
+    </div>
+
+    <script>
+        const checks = {
+            html: [
+                'index.html',
+                'ai-chat.html',
+                'profile.html',
+                'exchange.html',
+                'settings.html',
+                'achievements.html',
+                'exchange-history.html'
+            ],
+            css: [
+                'css/style.css',
+                'css/profile.css',
+                'css/ai-chat.css',
+                'css/exchange.css',
+                'css/admin.css',
+                'css/login-rewards.css',
+                'css/egg-reward-ui.css'
+            ],
+            js: [
+                'js/main.js',
+                'js/ai-encoder.js',
+                'js/ai-chat-system.js',
+                'js/mood-posts.js',
+                'js/exchange-system.js',
+                'js/profile-manager.js',
+                'js/admin-panel.js',
+                'js/crawler-detector.js',
+                'js/login-rewards.js',
+                'js/error-handler.js',
+                'js/egg-security-checker.js',
+                'js/egg-reward-ui.js',
+                'js/web3-integration.js',
+                'js/ai-identity-generator.js',
+                'js/ai-identity-nft-manager.js'
+            ],
+            cdn: [
+                'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css',
+                'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
+                'https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js'
+            ]
+        };
+
+        let results = {
+            success: 0,
+            error: 0,
+            warning: 0,
+            total: 0
+        };
+
+        const consoleOutput = document.getElementById('console-output');
+        
+        function log(message, type = 'info') {
+            const colors = {
+                info: '#10b981',
+                error: '#ef4444',
+                warning: '#fbbf24',
+                success: '#10b981'
+            };
+            const line = document.createElement('div');
+            line.style.color = colors[type];
+            line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleOutput.appendChild(line);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        async function checkResource(url, type) {
+            results.total++;
+            log(`檢查 ${url}...`, 'info');
+            
+            try {
+                const response = await fetch(url, { method: 'HEAD' });
+                const status = response.ok;
+                
+                const icon = status ? '✅' : '❌';
+                const statusClass = status ? 'success' : 'error';
+                const statusText = status ? '成功' : '失敗';
+                
+                if (status) {
+                    results.success++;
+                    log(`${icon} ${url} - ${statusText}`, 'success');
+                } else {
+                    results.error++;
+                    log(`${icon} ${url} - ${statusText} (HTTP ${response.status})`, 'error');
+                }
+                
+                return {
+                    url,
+                    status,
+                    statusCode: response.status,
+                    statusClass,
+                    icon
+                };
+            } catch (error) {
+                results.error++;
+                log(`❌ ${url} - 載入失敗: ${error.message}`, 'error');
+                
+                return {
+                    url,
+                    status: false,
+                    error: error.message,
+                    statusClass: 'error',
+                    icon: '❌'
+                };
+            }
+        }
+
+        function renderCheck(result, container) {
+            const div = document.createElement('div');
+            div.className = `check-item ${result.statusClass}`;
+            div.innerHTML = `
+                <div class="icon ${result.statusClass}">${result.icon}</div>
+                <div class="check-details">
+                    <div class="check-name">${result.status ? '載入成功' : '載入失敗'}</div>
+                    <div class="check-path">${result.url}</div>
+                    ${result.error ? `<div class="error-details">錯誤: ${result.error}</div>` : ''}
+                    ${result.statusCode ? `<div class="check-path">HTTP ${result.statusCode}</div>` : ''}
+                </div>
+            `;
+            container.appendChild(div);
+        }
+
+        function updateSummary() {
+            document.getElementById('total-checks').textContent = results.total;
+            document.getElementById('success-count').textContent = results.success;
+            document.getElementById('error-count').textContent = results.error;
+            document.getElementById('warning-count').textContent = results.warning;
+            
+            const overallStatus = document.getElementById('overall-status');
+            if (results.error === 0) {
+                overallStatus.className = 'status success';
+                overallStatus.innerHTML = '✅ 所有檢查通過！';
+            } else if (results.error < results.total * 0.3) {
+                overallStatus.className = 'status warning';
+                overallStatus.innerHTML = `⚠️ 發現 ${results.error} 個問題`;
+            } else {
+                overallStatus.className = 'status error';
+                overallStatus.innerHTML = `❌ 發現 ${results.error} 個嚴重問題`;
+            }
+        }
+
+        async function runChecks() {
+            log('開始診斷...', 'info');
+            log('', 'info');
+            
+            // HTML 檢查
+            log('檢查 HTML 文件...', 'info');
+            for (const file of checks.html) {
+                const result = await checkResource(file, 'html');
+                renderCheck(result, document.getElementById('html-checks'));
+            }
+            
+            // CSS 檢查
+            log('', 'info');
+            log('檢查 CSS 文件...', 'info');
+            for (const file of checks.css) {
+                const result = await checkResource(file, 'css');
+                renderCheck(result, document.getElementById('css-checks'));
+            }
+            
+            // JS 檢查
+            log('', 'info');
+            log('檢查 JavaScript 文件...', 'info');
+            for (const file of checks.js) {
+                const result = await checkResource(file, 'js');
+                renderCheck(result, document.getElementById('js-checks'));
+            }
+            
+            // CDN 檢查
+            log('', 'info');
+            log('檢查 CDN 資源...', 'info');
+            for (const file of checks.cdn) {
+                const result = await checkResource(file, 'cdn');
+                renderCheck(result, document.getElementById('cdn-checks'));
+            }
+            
+            log('', 'info');
+            log('診斷完成！', 'success');
+            
+            updateSummary();
+        }
+
+        // 頁面載入時執行
+        window.addEventListener('load', runChecks);
+    </script>
+</body>
+</html>

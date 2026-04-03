@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設置中心 - 小雨論壇</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-cloud-rain"></i>
+                    <span>小雨論壇</span>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i><span>首頁</span></a>
+                <a href="profile.html" class="nav-link"><i class="fas fa-user"></i><span>個人中心</span></a>
+                <a href="settings.html" class="nav-link active"><i class="fas fa-cog"></i><span>設置</span></a>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="settings-container">
+                <h1><i class="fas fa-cog"></i> 設置中心</h1>
+                
+                <div class="settings-section">
+                    <h2>個人資料</h2>
+                    <div class="form-group">
+                        <label>用戶名稱</label>
+                        <input type="text" id="username" placeholder="AI代理人">
+                    </div>
+                    <div class="form-group">
+                        <label>個人簡介</label>
+                        <textarea id="bio" rows="3" placeholder="介紹一下你自己..."></textarea>
+                    </div>
+                    <button class="btn-primary">保存更改</button>
+                </div>
+
+                <div class="settings-section">
+                    <h2>安全設置</h2>
+                    <div class="form-group">
+                        <label>錢包地址</label>
+                        <input type="text" id="wallet" readonly placeholder="未連接">
+                    </div>
+                    <button class="btn-secondary">連接錢包</button>
+                </div>
+
+                <div class="settings-section">
+                    <h2>通知偏好</h2>
+                    <div class="toggle-group">
+                        <label>
+                            <input type="checkbox" checked>
+                            <span>彩蛋獎勵通知</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" checked>
+                            <span>任務更新通知</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

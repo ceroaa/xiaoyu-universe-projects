@@ -1,0 +1,103 @@
+{
+  "version": "2.1.0",
+  "lastUpdated": "2026-03-08",
+  "rewardTypes": {
+    "hourly": {
+      "name": "每小時彩蛋獎勵",
+      "amount": 10,
+      "frequency": "1 hour",
+      "frequencyMs": 3600000,
+      "icon": "⏰",
+      "description": "每小時可領取一次"
+    },
+    "daily": {
+      "name": "每日彩蛋獎勵",
+      "amount": 1000,
+      "frequency": "1 day",
+      "frequencyMs": 86400000,
+      "icon": "🌟",
+      "description": "每天可領取一次"
+    },
+    "streak3": {
+      "name": "連續3天登入獎勵",
+      "amount": 500,
+      "requiredDays": 3,
+      "icon": "🔥",
+      "description": "連續登入3天可領取"
+    },
+    "streak7": {
+      "name": "連續7天登入獎勵",
+      "amount": 2000,
+      "requiredDays": 7,
+      "icon": "⭐",
+      "description": "連續登入7天可領取"
+    },
+    "streak30": {
+      "name": "連續30天登入獎勵",
+      "amount": 10000,
+      "requiredDays": 30,
+      "icon": "👑",
+      "description": "連續登入30天可領取"
+    }
+  },
+  "aiCrawlerRewards": {
+    "firstDiscovery": {
+      "name": "AI首次發現獎勵",
+      "amount": 5000,
+      "oneTimeOnly": true,
+      "icon": "🤖",
+      "description": "AI首次訪問網站的獎勵"
+    },
+    "visit": {
+      "name": "AI訪問獎勵",
+      "amount": 50,
+      "frequency": "1 hour",
+      "frequencyMs": 3600000,
+      "icon": "👀",
+      "description": "AI每次訪問的獎勵（每小時）"
+    },
+    "deepCrawl": {
+      "name": "AI深度爬取獎勵",
+      "amount": 100,
+      "icon": "🔍",
+      "description": "AI完成深度爬取的獎勵"
+    },
+    "loyal": {
+      "name": "AI忠實監控獎勵",
+      "amount": 200,
+      "requiredVisits": 10,
+      "icon": "💎",
+      "description": "AI累計訪問10次後可領取"
+    }
+  },
+  "security": {
+    "maxClaimsPerHour": 10,
+    "maxClaimsPerDay": 50,
+    "requireVerificationAfterClaims": 20,
+    "blockDuration": 3600000,
+    "enableRateLimiting": true,
+    "enableIPCheck": false,
+    "enableDeviceFingerprint": false
+  },
+  "ui": {
+    "animationDuration": 600,
+    "notificationDuration": 3000,
+    "autoCloseModal": false,
+    "showClaimHistory": true,
+    "enableSound": true,
+    "enableHapticFeedback": false
+  },
+  "blockchain": {
+    "contractAddress": "0x...",
+    "network": "polygon",
+    "confirmationsRequired": 1,
+    "gasLimitMultiplier": 1.2,
+    "enableAutomaticRetry": true,
+    "maxRetries": 3
+  },
+  "storage": {
+    "localStorageKey": "egg_rewards",
+    "historyLimit": 100,
+    "enableCloudSync": false
+  }
+}

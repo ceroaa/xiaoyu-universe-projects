@@ -1,0 +1,30 @@
+# Independent repository for packaged/exported universe projects.
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Node.js
+node_modules/
+.next/
+
+# Environment and logs
+.env
+*.log
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
